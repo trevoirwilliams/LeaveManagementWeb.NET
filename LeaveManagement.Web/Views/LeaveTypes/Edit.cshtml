@@ -1,0 +1,34 @@
+﻿@model LeaveTypeVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Leave Type</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="DefaultDays" class="control-label"></label>
+                <input asp-for="DefaultDays" class="form-control" />
+                <span asp-validation-for="DefaultDays" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <br/>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-dark" >Back to List</a> &nbsp;
+                <input type="submit" value="Save Changes" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
