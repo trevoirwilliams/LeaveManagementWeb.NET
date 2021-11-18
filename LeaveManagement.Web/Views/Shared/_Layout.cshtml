@@ -31,17 +31,21 @@
                          <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">My Leave</a>
                         </li>
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Leave Management
-                          </a>
-                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a></li>
-                            <li><a class="dropdown-item" href="#">Leave Allocations</a></li>
-                            <li><a class="dropdown-item" href="#">Leave Requests</a></li>
-                            <li><a class="dropdown-item" href="#">Employee Management</a></li>
-                          </ul>
-                        </li>
+                        @if (User.IsInRole(Roles.Administrator))
+                        {
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Leave Management
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a></li>
+                                <li><a class="dropdown-item" href="#">Leave Allocations</a></li>
+                                <li><a class="dropdown-item" href="#">Leave Requests</a></li>
+                                <li><a class="dropdown-item" href="#">Employee Management</a></li>
+                              </ul>
+                            </li>
+                        }
+                        
                     </ul>
                     <partial name="_LoginPartial" /> 
                 </div>
