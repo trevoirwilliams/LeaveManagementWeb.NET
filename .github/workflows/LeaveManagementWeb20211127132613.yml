@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core app to Windows WebApp LeaveManagementWeb20211127132613
+﻿name: Build and deploy .NET Core app to Windows WebApp LeaveManagementWeb20211127132613
 on:
   push:
     branches:
@@ -23,10 +23,25 @@ jobs:
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+    - name: Install EF Tool
+      run: |
+          dotnet new tool-manifest
+          dotnet tool install dotnet-ef
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+    - name: Generate scripts
+      run: dotnet ef migrations script --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --idempotent --context ApplicationDbContext
+    - name: Azure SQL Deploy
+      uses: Azure/sql-action@v1
+      with:
+        # Name of the Azure SQL Server name
+        server-name: tcp:leavemanagementnet6dbserver.database.windows.net
+        # The connection string
+        connection-string: ${{ secrets.DefaultConnection }}
+        # Path to SQL script file
+        sql-file: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
       with:
