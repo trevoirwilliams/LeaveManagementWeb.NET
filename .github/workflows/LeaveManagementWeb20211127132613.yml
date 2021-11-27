@@ -10,6 +10,7 @@ env:
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: LeaveManagement.Web
+  DATA_DIRECTORY: LeaveManagement.Data
 jobs:
   build-and-deploy:
     runs-on: windows-latest
@@ -32,7 +33,7 @@ jobs:
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
     - name: Generate scripts
-      run: dotnet ef migrations script --output ${{env.WORKING_DIRECTORY}}/sql/sql-script.sql --idempotent --context ApplicationDbContext
+      run: dotnet ef migrations script --output ${{env.WORKING_DIRECTORY}}/sql/sql-script.sql --project {{env.DATA_DIRECTORY}} --idempotent --context ApplicationDbContext
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:
