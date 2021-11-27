@@ -32,7 +32,7 @@ jobs:
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
     - name: Generate scripts
-      run: dotnet ef migrations script --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --idempotent --context ApplicationDbContext
+      run: dotnet ef migrations script --output ${{env.WORKING_DIRECTORY}}/sql/sql-script.sql --idempotent --context ApplicationDbContext
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:
