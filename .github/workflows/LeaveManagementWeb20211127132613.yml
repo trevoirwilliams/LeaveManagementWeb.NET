@@ -36,11 +36,8 @@ jobs:
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:
-        # Name of the Azure SQL Server name
         server-name: tcp:leavemanagementnet6dbserver.database.windows.net
-        # The connection string
         connection-string: ${{ secrets.DefaultConnection }}
-        # Path to SQL script file
         sql-file: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
