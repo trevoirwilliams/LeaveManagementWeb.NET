@@ -37,7 +37,7 @@ jobs:
       uses: Azure/sql-action@v1
       with:
         server-name: tcp:leavemanagementnet6dbserver.database.windows.net
-        connection-string: ${{ secrets.AZURE_CONNECTION }}
+        connection-string: ${{ secrets.AZURE_CONNECTION }} 
         sql-file: ${{env.WORKING_DIRECTORY}}/sql/sql-script.sql
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
