@@ -23,22 +23,10 @@ jobs:
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
-    - name: Install EF Tool
-      run: |
-          dotnet new tool-manifest
-          dotnet tool install dotnet-ef
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
-    - name: Generate scripts
-      run: dotnet ef migrations script --output ${{env.WORKING_DIRECTORY}}/sql/script.sql --project ${{env.WORKING_DIRECTORY}}/LeaveManagement.Web.csproj --idempotent --context ApplicationDbContext
-    - name: Azure SQL Deploy
-      uses: Azure/sql-action@v1
-      with:
-        server-name: tcp:leavemanagementnet6dbserver.database.windows.net
-        connection-string: ${{ secrets.AZURE_CONNECTION }} 
-        sql-file: ${{env.WORKING_DIRECTORY}}/sql/script.sql
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
       with:
