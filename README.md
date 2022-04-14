@@ -1,6 +1,6 @@
 # .NET 6 Leave Management System
 
-.NET 6 Leave Management Application for educational purposes and is built in part for the course entitled: "Complete ASP.NET Core and Entity Framework Development"
+.NET 6 Leave Management Application for educational purposes and is built in part for the course entitled: [Complete ASP.NET Core and Entity Framework Development](https://www.udemy.com/course/complete-aspnet-core-31-and-entity-framework-development/?referralCode=739749EF600855CEE34F)
 Learn to how:
 - Build a fully data driven web application using cutting edge technology 
 - Connect to a Database using Entity Framework Core
