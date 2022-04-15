@@ -110,7 +110,7 @@
             </td>
            
             <td>
-                    @if(item.Cancelled == false)
+                    @if(item.Cancelled == false && item.Approved == null)
                     {
                         <a asp-action="Details" class="btn btn-primary btn-sm" asp-route-id="@item.Id">Review</a> 
                     }
