@@ -90,7 +90,7 @@ Instructions on how to use them in your own application are linked below.
 | Plugin | Links |
 | ------ | ------ |
 | Font Awesome | [https://fontawesome.com/icons][PlDb] |
-| Sweetalert | [plugins/github/README.md][PlGh] |
+| Sweetalert | [https://sweetalert2.github.io/] |
 | Datepicker |[https://jqueryui.com/datepicker/][PlGd] |
 
 ## Contribute
